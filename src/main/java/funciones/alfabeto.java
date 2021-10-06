@@ -78,8 +78,10 @@ public class alfabeto {
             valor = 4;
         } else if (agrupacion.contains(caracter)) {
             valor = 5;
-        } else if (Character.isSpaceChar(caracter) || caracter == '\n') {
+        } else if (Character.isSpaceChar(caracter)) {
             valor = -2;
+        }else if (caracter=='\n') {
+            valor =-3;
         }
 
         return valor;

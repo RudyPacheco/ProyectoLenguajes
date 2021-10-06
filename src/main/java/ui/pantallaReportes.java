@@ -58,6 +58,7 @@ public class pantallaReportes extends javax.swing.JFrame {
         jButtonReporteErrores = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jButtonBitacora = new javax.swing.JButton();
+        jButtonRecuento = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -186,6 +187,14 @@ public class pantallaReportes extends javax.swing.JFrame {
         });
         jPanel2.add(jButtonBitacora);
 
+        jButtonRecuento.setText("Recuento por tokens");
+        jButtonRecuento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRecuentoActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonRecuento);
+
         jPanelCentral.add(jPanel2, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(jPanelCentral, java.awt.BorderLayout.CENTER);
@@ -223,6 +232,13 @@ public class pantallaReportes extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonBitacoraActionPerformed
 
+    private void jButtonRecuentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRecuentoActionPerformed
+        // TODO add your handling code here:
+        recuentoTokens recuento = new recuentoTokens(this,tokens);
+        recuento.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonRecuentoActionPerformed
+
     private void activarBotones() {
         if (tokens.isEmpty() || !errores.isEmpty()) {
             jButtonReporteTokens.setEnabled(false);
@@ -239,6 +255,7 @@ public class pantallaReportes extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAtras;
     private javax.swing.JButton jButtonBitacora;
+    private javax.swing.JButton jButtonRecuento;
     private javax.swing.JButton jButtonReporteErrores;
     private javax.swing.JButton jButtonReporteTokens;
     private javax.swing.JLabel jLabelTitulo;

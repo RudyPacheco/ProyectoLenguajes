@@ -7,12 +7,22 @@ package ui;
 
 import controlUI.validarToken;
 import funciones.NumeroLinea;
+import funciones.buscarPalabra;
+import java.awt.Color;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultHighlighter;
+import javax.swing.text.Highlighter;
 
 /**
  *
@@ -25,6 +35,7 @@ public class home extends javax.swing.JFrame {
      */
     validarToken validar = new validarToken();
     JFileChooser seleccionar = new JFileChooser();
+    buscarPalabra buscarPalabra ;
     File archivo;
     FileInputStream entrada;
     FileOutputStream salida;
@@ -56,6 +67,8 @@ public class home extends javax.swing.JFrame {
         jPanelInferior = new javax.swing.JPanel();
         jButtonCargarArchivox = new javax.swing.JButton();
         jButtonGuardarArchivo = new javax.swing.JButton();
+        jTextFieldBuscar = new javax.swing.JTextField();
+        jButtonBuscar = new javax.swing.JButton();
         jPanelCentral = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
@@ -121,7 +134,7 @@ public class home extends javax.swing.JFrame {
         jPanelIzquierdo.setLayout(jPanelIzquierdoLayout);
         jPanelIzquierdoLayout.setHorizontalGroup(
             jPanelIzquierdoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 207, Short.MAX_VALUE)
         );
         jPanelIzquierdoLayout.setVerticalGroup(
             jPanelIzquierdoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,6 +159,19 @@ public class home extends javax.swing.JFrame {
             }
         });
 
+        jTextFieldBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldBuscarActionPerformed(evt);
+            }
+        });
+
+        jButtonBuscar.setText("Buscar");
+        jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBuscarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelInferiorLayout = new javax.swing.GroupLayout(jPanelInferior);
         jPanelInferior.setLayout(jPanelInferiorLayout);
         jPanelInferiorLayout.setHorizontalGroup(
@@ -155,7 +181,11 @@ public class home extends javax.swing.JFrame {
                 .addComponent(jButtonCargarArchivox)
                 .addGap(52, 52, 52)
                 .addComponent(jButtonGuardarArchivo)
-                .addContainerGap(397, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+                .addComponent(jTextFieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonBuscar)
+                .addContainerGap())
         );
         jPanelInferiorLayout.setVerticalGroup(
             jPanelInferiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,7 +193,9 @@ public class home extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(jPanelInferiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCargarArchivox)
-                    .addComponent(jButtonGuardarArchivo))
+                    .addComponent(jButtonGuardarArchivo)
+                    .addComponent(jTextFieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonBuscar))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
 
@@ -230,6 +262,68 @@ public class home extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButtonGuardarArchivoActionPerformed
 
+    private void jTextFieldBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldBuscarActionPerformed
+
+    private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
+        // TODO add your handling code here:
+        this.buscarPalabra=new buscarPalabra();
+        buscarPalabra.buscarpalabra1(jTextPane1, jTextFieldBuscar.getText());
+        
+        
+      //  buscarpalabra(jTextPane1, jTextFieldBuscar.getText());
+    }//GEN-LAST:event_jButtonBuscarActionPerformed
+
+//    public void buscarpalabra(JTextPane area1, String texto) {
+//        if (texto.length() >= 1) {
+//            DefaultHighlighter.DefaultHighlightPainter highlightPainter = new DefaultHighlighter.DefaultHighlightPainter(Color.GREEN);
+//            Highlighter h = area1.getHighlighter();
+//            h.removeAllHighlights();
+//            String text = area1.getText();
+//            String caracteres = texto;
+//            Pattern p = Pattern.compile("(?i)" + caracteres);
+//            Matcher m = p.matcher(text);
+//            while (m.find()) {
+//                try {
+//                    h.addHighlight(m.start(), m.end(), highlightPainter);
+//                } catch (BadLocationException ex) {
+//                   // Logger.getLogger(color.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//        } else {
+//             Highlighter h = area1.getHighlighter();
+//            h.removeAllHighlights();
+//         //   JOptionPane.showMessageDialog(area1, "la palabra a buscar no puede ser vacia");
+//        }
+//    
+//    }
+    
+    public void buscarpalabra(JTextPane area1, String texto) {
+        if (texto.length() >= 1) {
+            DefaultHighlighter.DefaultHighlightPainter highlightPainter = new DefaultHighlighter.DefaultHighlightPainter(Color.GREEN);
+            Highlighter h = area1.getHighlighter();
+            h.removeAllHighlights();
+            String text = area1.getText();
+            String caracteres = texto;
+            Pattern p = Pattern.compile("(?i)" + caracteres);
+            Matcher m = p.matcher(text);
+            while (m.find()) {
+                try {
+                    h.addHighlight(m.start(), m.end(), highlightPainter);
+                } catch (BadLocationException ex) {
+                   // Logger.getLogger(color.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } else {
+             Highlighter h = area1.getHighlighter();
+            h.removeAllHighlights();
+         //   JOptionPane.showMessageDialog(area1, "la palabra a buscar no puede ser vacia");
+        }
+    
+    }
+    
+    
     public String abrirArchivo(File archivo) {
         String documento = "";
         try {
@@ -259,6 +353,7 @@ public class home extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonBuscar;
     private javax.swing.JButton jButtonCargarArchivox;
     private javax.swing.JButton jButtonGuardarArchivo;
     private javax.swing.JButton jButtonLimpiar;
@@ -271,6 +366,7 @@ public class home extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelIzquierdo;
     private javax.swing.JPanel jPanelSuperior;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField jTextFieldBuscar;
     private javax.swing.JTextPane jTextPane1;
     // End of variables declaration//GEN-END:variables
 }

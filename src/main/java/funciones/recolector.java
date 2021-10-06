@@ -28,13 +28,14 @@ public class recolector {
     int estadoActua = 0;
     int fila = 1;
     int columna = 1;
+   
 
     public recolector() {
 
     }
 
-    public void recolectar2(char caracter, int estado) {
-
+    public void recolectar(char caracter, int estado) {
+   
         if (estado >= 0 && estado <= 7) {
 
             tokenActual += caracter;
@@ -59,9 +60,11 @@ public class recolector {
                     validar(tokenActual, caracter, estadoActua, fila, columna);
                 }
                 if (estado == -3) {
+                     columna++;
+                     validar(tokenActual, caracter, estadoActua, fila, columna);
                     fila++;
                     columna = 1;
-                    validar(tokenActual, caracter, estadoActua, fila, columna);
+                   
                 }
                   bitacora.add(cambioEstados);
                 //  tokens.add(tokenActual);
@@ -73,24 +76,24 @@ public class recolector {
         }
     }
 
-    public void recolectar(char caracter, int estado) {
-        // System.out.println("recolecor");
-
-        if (estado == -1) {
-            if (!tokenActual.equals("")) {
-                tokenActual += caracter;
-                tokens.add(tokenActual);
-                System.out.println("añadio " + tokenActual);
-                tokenActual = "";
-            }
-        } else {
-            if (estado == -2) {
-                tokenActual = "";
-            } else {
-                tokenActual += caracter;
-            }
-
-        }
+//    public void recolectar(char caracter, int estado) {
+//        // System.out.println("recolecor");
+//
+//        if (estado == -1) {
+//            if (!tokenActual.equals("")) {
+//                tokenActual += caracter;
+//                tokens.add(tokenActual);
+//                System.out.println("añadio " + tokenActual);
+//                tokenActual = "";
+//            }
+//        } else {
+//            if (estado == -2) {
+//                tokenActual = "";
+//            } else {
+//                tokenActual += caracter;
+//            }
+//
+//        }
 
 //        if (estado >= 0 && estado <= 5) {
 //            tokenActual += caracter;
@@ -102,7 +105,7 @@ public class recolector {
 //                tokenActual = "";
 //            }
 //        }
-    }
+    //}
 
     public void agregarError(String cadena, char caracter, int fila, int columna) {
         error errorTMP = new error();
@@ -116,7 +119,8 @@ public class recolector {
 
     public void agregarToken(String cadena, int estado, int fila, int columna) {
         int columnaTMP = columna - cadena.length();
-
+        
+        System.out.println("Columna nueva "+columnaTMP);
         token tokenTMP = new token();
         tokenTMP.setCadena(cadena);
         tokenTMP.setId(matriz.id(estado));
@@ -141,6 +145,8 @@ public class recolector {
 //        System.out.println("estado recibido " + estado);
 //        System.out.println("caracer recibido "+caracter);
 //        
+        System.out.println(fila +" "+columna);
+        System.out.println(cadena);
         char tmp = cadena.charAt(cadena.length() - 2);
         // System.out.println("tmp "+tmp);
         if (comprobarEstado(estado)) {
